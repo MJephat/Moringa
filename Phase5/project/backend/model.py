@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, Table
 # from sqlalchemy.orm import relationship
 # Create an instance of SQLAlchemy
 from exts import db
@@ -15,4 +15,22 @@ class User(db.Model):
         return f"<User {self.userName}>"
     def save(self):
         db.session.add(self)
+        db.session.commit()
+
+class Event(db.Model):
+    __tablename__ = 'events'
+    id = db.Column(db.Integer, primary_key=True)
+    host = db.Column(db.Text, nullable=False)
+    title = db.Column(db.Text, nullable=False)
+    media = db.Column(db.Text, nullable=False)
+    location = db.Column(db.Text, nullable=False)
+    time = db.Column(db.Text, nullable=False)
+    date = db.Column(db.Text, nullable=False)
+    category = db.Column(db.String(50), nullable=False)
+        
+    # Define a relationship to the User model
+    def __repr__(self):
+        return f"<Report {self.title}>"
+    def delete(self):
+        db.session.delete(self)
         db.session.commit()
