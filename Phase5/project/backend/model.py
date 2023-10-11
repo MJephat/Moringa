@@ -26,11 +26,27 @@ class Event(db.Model):
     location = db.Column(db.Text, nullable=False)
     time = db.Column(db.Text, nullable=False)
     date = db.Column(db.Text, nullable=False)
-    category = db.Column(db.String(50), nullable=False)
+    price = db.Column(db.Text, nullable=False)
+    # category = db.Column(db.String(50), nullable=False)
         
     # Define a relationship to the User model
     def __repr__(self):
-        return f"<Report {self.title}>"
+        return f"<Event {self.title}>"
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+        
     def delete(self):
         db.session.delete(self)
+        db.session.commit()
+
+    def update(self, host, title, media, location, time, date,price):
+        self.host = host
+        self.title = title
+        self.media = media
+        self.location = location
+        self.time = time
+        self.date = date
+
         db.session.commit()
