@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import UserSideBar from './UserSideBar';
+
 const EventsList = () => {
   const [events, setEvents] = useState([]);
   useEffect(() => {
-    // Fetch report data here
+
     fetch('/events')
       .then(response => response.json())
       .then(data => setEvents(data))
@@ -75,7 +75,7 @@ const EventsList = () => {
       {/* <UserSideBar/> */}
       {events.map(event => (
         <div key={event.id} className="card">
-          <button className="delete-btn" onClick={() => handleDeleteEvent(event.id)}>x</button>
+          {/* <button className="delete-btn" onClick={() => handleDeleteEvent(event.id)}>x</button> */}
           <h3>
             <span onClick={() => handleEditField(event.id, 'title', prompt('Enter new title:', event.title))}>
               {event.title}
@@ -105,7 +105,7 @@ const EventsList = () => {
             <input type="file" accept="image/*" onChange={(e) => handleEditMedia(event.id, e.target.files[0])} />
             <img src={event.media} alt="Event Media" onClick={() => {}} />
           </div>
-          {/* <p className="card-email">{event.reporter_email}</p> */}
+
         </div>
       ))}
     </div>

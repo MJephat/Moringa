@@ -1,5 +1,5 @@
 import os
-from flask import Flask,request,jsonify, render_template,make_response
+from flask import Flask,request, jsonify, render_template,make_response
 from flask_restx import Api, Resource,fields
 from config import DevConfig
 from exts import db
@@ -141,7 +141,7 @@ class Upload(Resource):
     def post(self):
         if request.method == "POST":
             file_to_upload = request.files["file"]
-            if file_to_upload or file_to_upload.filename == "":
+            if file_to_upload:
                 upload_result = cloudinary.uploader.upload(file_to_upload)
                 price = request.form.get('price')
                 host = request.form.get("host")
